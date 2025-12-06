@@ -1,0 +1,111 @@
+const Usuario = require('./Usuario')
+const Pedido = require('./Pedido')
+const Produto = require('./Produto')
+const ItemPedido = require('./ItemPedido')
+const Entrega = require('./Entrega')
+const Estoque = require('./Estoque')
+
+// -------------------------------------------------------------------------
+// 1. RELACIONAMENTOS USUÁRIO (codUsuario)
+// -------------------------------------------------------------------------
+
+// USUÁRIO <-> PEDIDO (1:N)
+Usuario.hasMany(Pedido, {
+    foreignKey: 'idUsuario',
+    as: 'pedidosUsuario',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+
+Pedido.belongsTo(Usuario, {
+    foreignKey: 'idUsuario',
+    as: 'usuarioPedido'
+})
+
+
+// -------------------------------------------------------------------------
+// 2. RELACIONAMENTOS PEDIDO (codPedido) - SET NULL para endereço é NECESSÁRIO
+// -------------------------------------------------------------------------
+
+// PEDIDO <-> ITEM_PEDIDO (1:N)
+Pedido.hasMany(ItemPedido, {
+    foreignKey: 'idPedido',
+    as: 'itensPedido',
+    onDelete: 'CASCADE', 
+    onUpdate: 'CASCADE'
+})
+
+ItemPedido.belongsTo(Pedido, {
+    foreignKey: 'idPedido',
+    as: 'pedidoItem'
+})
+
+// PEDIDO <-> ENTREGA (1:1)
+Pedido.hasOne(Entrega, {
+    foreignKey: 'idPedido',
+    as: 'entregaPedido',
+    onDelete: 'CASCADE', 
+    onUpdate: 'CASCADE'
+})
+
+Entrega.belongsTo(Pedido, {
+    foreignKey: 'idPedido',
+    as: 'pedidoEntrega'
+})
+
+// -------------------------------------------------------------------------
+// 3. RELACIONAMENTOS PRODUTO (codProduto) - RESTRICT para vendas é CRÍTICO
+// -------------------------------------------------------------------------
+
+// PRODUTO <-> ITEM_PEDIDO (1:N)
+Produto.hasMany(ItemPedido, {
+    foreignKey: 'idProduto',
+    as: 'itensProduto',
+    onDelete: 'RESTRICT', // IMPEDE a exclusão do Produto se houver histórico de vendas!
+    onUpdate: 'CASCADE'
+})
+
+ItemPedido.belongsTo(Produto, {
+    foreignKey: 'idProduto',
+    as: 'produtoItem'
+})
+
+// PRODUTO <-> ESTOQUE (1:1)
+Produto.hasOne(Estoque, {
+    foreignKey: 'idProduto',
+    as: 'estoqueProduto',
+    onDelete: 'CASCADE', 
+    onUpdate: 'CASCADE'
+})
+
+Estoque.belongsTo(Produto, {
+    foreignKey: 'idProduto',
+    as: 'produtoEstoque'
+})
+
+
+module.exports = { 
+    Usuario, 
+    Pedido, 
+    Produto, 
+    ItemPedido, 
+    Entrega, 
+    Estoque 
+}
+
+/* Explicações de:
+
+onDelete: 'SET NULL' => “Se o registro pai for deletado, o campo FK no filho vira NULL (não apaga o filho).”
+
+Se o endereço for apagado (usuário mudou de casa, por exemplo), o pedido não é apagado — apenas o campo 
+idEndereco dentro de Pedido fica NULL. Isso faz sentido porque o pedido é histórico (já aconteceu), e 
+você não quer perder o registro da venda só porque o endereço foi removido.
+
+onDelete: 'RESTRICT' => “Bloqueie a exclusão do registro pai se ele tiver filhos.”
+
+Se um produto já foi vendido (tem registros em ItemPedido), você não pode 
+simplesmente apagá-lo, porque quebraria o histórico de vendas. Ideal para 
+auditoria e consistência comercial — você pode desativar o produto (campo ativo: false), 
+mas não deletar fisicamente.
+
+*/

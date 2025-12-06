@@ -1,0 +1,227 @@
+/* =========================================
+   TEMA ALTERNATIVO — VISUAL MAIS MODERNO E FRIO
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: #f2f6fa; /* Azul claro suave */
+    color: #2c3e50;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   HEADER — Azul escuro moderno
+   ========================================= */
+header {
+    background-color: #2c3e50; /* Azul petróleo */
+    padding: 15px 20px;
+    color: white;
+    text-align: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+header nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: 0.2s;
+    background-color: rgba(255,255,255,0.05);
+}
+
+header nav a:hover {
+    background-color: rgba(255,255,255,0.2);
+    transform: scale(1.05);
+}
+
+/* =========================================
+   MAIN
+   ========================================= */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    overflow-y: auto;
+    gap: 20px;
+}
+
+#usuarios {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #2c3e50;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #2c3e50;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+#pedidos {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* =========================================
+   CARDS
+   ========================================= */
+.pedido-card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    border-left: 6px solid #2980b9; /* Azul vibrante */
+    transition: 0.2s;
+}
+
+.pedido-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.pedido-header h3 {
+    color: #2980b9;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.pedido-header span {
+    color: #555;
+    font-weight: 600;
+    background: #eef4f8;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.pedido-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.pedido-info-grid > div {
+    background: #f7f9fb;
+    padding: 15px;
+    border: 1px solid #dfe6ee;
+    border-radius: 8px;
+}
+
+.pedido-info-grid h4 {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #34495e;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 4px;
+}
+
+/* =========================================
+   INPUTS E SELECTS
+   ========================================= */
+label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #bfc9d4;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: #fff;
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.25);
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    background: #eaf1f7;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #2980b9;
+}
+
+/* =========================================
+   LISTA DE ITENS
+   ========================================= */
+.lista-itens {
+    list-style: none;
+    background-color: #eef4f8;
+    border: 1px solid #d3e1ed;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+.lista-itens li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #c7d3df;
+    font-size: 0.95rem;
+    color: #2c3e50;
+}
+
+.lista-itens li:last-child {
+    border-bottom: none;
+}
+
+.lista-itens strong {
+    color: #1b2a38;
+    margin-right: 5px;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #dce3eb; }
+::-webkit-scrollbar-thumb { background: #9bb6cc; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #2980b9; }

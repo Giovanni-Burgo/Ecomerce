@@ -1,0 +1,40 @@
+let res = document.getElementById("res")
+let button = document.getElementById("button")
+
+button.addEventListener("click", (e)=>{
+    e.preventDefault()
+
+    let email = document.getElementById("email").value
+    let senha = document.getElementById("senha").value
+
+    const valores = {
+        email: email,
+        senha: senha,
+    }
+
+    fetch(`http://localhost:3000/login`, {
+        method: "POST",
+        headers: { "content-type":"application/json", },
+        body: JSON.stringify(valores)
+    })
+    .then(resp => resp.json())
+    .then(dados =>{
+        if(dados.token){
+                    res.innerHTML = dados.message
+
+        sessionStorage.setItem("token", dados.token)
+        sessionStorage.setItem("nome", dados.nome)
+        sessionStorage.setItem("email", dados.email)
+
+        setTimeout(()=>{
+                window.location.href = "../../index.html"
+            }, 1000)
+        }else{
+            res.innerHTML = dados.message
+            res.innerHTML = dados.error
+        }
+    })
+    .catch(err =>{
+        console.error("Erro ao efetuar o login do usuario: ", err)
+    })
+})
