@@ -15,14 +15,6 @@ const Pedido = db.define('pedido',{
             key: 'codUsuario'  
         }
     },
-    idEndereco: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'enderecos', 
-            key: 'codEndereco'  
-        }
-    },
     dataPedido: {
         type: DataTypes.DATEONLY,
         allowNull: false,

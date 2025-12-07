@@ -35,4 +35,4 @@ document.addEventListener('click', function(evento) {
 
         adicionarProduto(botao, inputQuantidade);
     }
-});
+})

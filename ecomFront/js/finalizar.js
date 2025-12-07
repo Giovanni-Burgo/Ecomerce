@@ -81,7 +81,7 @@ function finalizarCompra(valorSubtotal) {
 
         const valoresEntrega = {
             idPedido: pedido.codPedido,
-        };
+        }
 
         console.log(valoresEntrega)
 
@@ -114,11 +114,11 @@ function finalizarCompra(valorSubtotal) {
             })
             .catch(err => {
                 console.error("Erro ao fazer o item pedido: ", err)
-            });
+            })
         })
         .catch(err => console.error("Erro com a entrega: ", err))
     })
     .catch(err => {
         console.error("Erro ao fazer o pedido: ", err)
-    });
+    })
 }
